@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import express from "express";
 import mongoose from "mongoose";
 import authRouter from "./routes/authRoutes.js";
+import assetRouter from "./routes/assetRoutes.js";
 import { ensureSeedData } from "./seed/seedDatabase.js";
 
 dotenv.config();
@@ -14,6 +15,7 @@ const mongoUri = process.env.MONGO_URI || "mongodb://db:27017/assetflow";
 app.use(cors());
 app.use(express.json());
 app.use("/api/auth", authRouter);
+app.use("/api/assets", assetRouter);
 
 app.get("/health", async (_req, res) => {
   const dbState = mongoose.connection.readyState;
