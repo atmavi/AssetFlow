@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { getAssetSummary } from "../controllers/assetController.js";
+import { getAssetSummary, getAllAssets, getAssetById } from "../controllers/assetController.js";
 
 const assetRouter = Router();
 
