@@ -5,4 +5,8 @@ const assetRouter = Router();
 
 assetRouter.get("/summary", getAssetSummary);
 
+// General/Dynamic routes second
+assetRouter.get("/", getAllAssets);
+assetRouter.get("/:id", getAssetById);
+
 export default assetRouter;
