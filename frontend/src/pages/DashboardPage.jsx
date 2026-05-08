@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import { fetchDashboardSummary } from "../lib/api"; 
 import AssetsTable from "../components/AssetsTable";
+import MetricCard from "../components/MetricCard";
 
 const defaultSummary = {
   totalAssets: 0,
@@ -9,15 +10,6 @@ const defaultSummary = {
   availableAssets: 0,
   maintenanceAssets: 0
 };
-
-function MetricCard({ title, value }) {
-  return (
-    <div className="rounded-lg bg-white p-5 shadow">
-      <p className="text-sm text-gray-500">{title}</p>
-      <p className="mt-2 text-3xl font-bold text-gray-900">{value}</p>
-    </div>
-  );
-}
 
 function DashboardPage() {
   const { token, user, logout } = useAuth();
