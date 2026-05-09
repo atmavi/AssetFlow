@@ -1,15 +1,42 @@
 import { useEffect, useState } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { fetchAsset } from "../lib/api";
 import StatusPill from "../components/StatusPill";
+import RequestModal from "../components/RequestModal";
+
+import { requestAsset } from "../lib/api";
 
 function AssetDetailsPage() {
+    const navigate = useNavigate();
+
     const { id } = useParams();
-    const { token } = useAuth();
+    const { token, user } = useAuth();
     const [asset, setAsset] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
+
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
+    // const handleRequestSubmit = async (id, data) => {
+    //     const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/assets/${id}/request`, {
+    //         method: "POST",
+    //         headers: {
+    //             "Content-Type": "application/json",
+    //             Authorization: `Bearer ${token}`
+    //         },
+    //         body: JSON.stringify({
+    //             reason,
+    //             userName: user.name,
+    //             userId: user.id
+    //         })
+    //     });
+
+    //     if (response.ok) {
+    //         // Refresh asset data or show success toast
+    //         setAsset(await response.json().asset);
+    //     }
+    // };
 
     useEffect(() => {
         const loadData = async () => {
@@ -57,13 +84,26 @@ function AssetDetailsPage() {
                             </h1>
                         </div>
                         <div className="flex-1" />
-                        <div className="flex gap-2">
-                            <button className="h-[34px] rounded-lg border border-[#ececec] bg-transparent px-3.5 text-[13px] font-medium text-[#8a8a8a] hover:bg-gray-50">
+                        <div className="flex gap-2 items-center">
+                            {/* The "Good" Edit Button */}
+                            <button className="h-[34px] rounded-lg border border-[#ececec] bg-transparent px-3.5 text-[13px] font-medium text-[#8a8a8a] hover:bg-gray-50 transition-colors">
                                 Edit
                             </button>
-                            <button className="h-[34px] rounded-lg border border-[#ececec] bg-[#5a90e0] px-3.5 text-[13px] font-medium text-white hover:bg-[#4a80d0]">
-                                Request Asset
-                            </button>
+
+                            {asset.status === "Available" ? (
+                                /* Primary Action: Request Asset (Blue) */
+                                <button
+                                    onClick={() => setIsModalOpen(true)}
+                                    className="h-[34px] rounded-lg border border-[#5a90e0] bg-[#5a90e0] px-3.5 text-[13px] font-medium text-white hover:bg-[#4a80d0] transition-colors"
+                                >
+                                    Request Asset
+                                </button>
+                            ) : (
+                                /* Secondary Action: Check In (White/Bordered) */
+                                <button className="h-[34px] rounded-lg border border-[#ececec] bg-transparent px-3.5 text-[13px] font-medium text-[#8a8a8a] hover:bg-gray-50 transition-colors">
+                                    Check In
+                                </button>
+                            )}
                         </div>
                     </div>
 
@@ -168,17 +208,19 @@ function AssetDetailsPage() {
                     </div>
                 </div>
             </div>
-            // <div className="p-8 max-w-2xl mx-auto">
-            //     <Link to="/" className="text-sm text-blue-600">&larr; Back to Dashboard</Link>
-            //     <h1 className="text-3xl font-bold mt-4">{asset.name}</h1>
-            //     <div className="mt-6 bg-white shadow rounded-lg p-6">
-            //         <p><strong>Serial:</strong> {asset.serialNumber}</p>
-            //         <p><strong>Category:</strong> {asset.category}</p>
-            //         <p><strong>Status:</strong> {asset.status}</p>
-            //         <p><strong>Specs:</strong> {asset.specifications || "None"}</p>
-            //     </div>
-            // </div>
         )}
+
+        <RequestModal
+            asset={asset}
+            isOpen={isModalOpen}
+            onClose={() => setIsModalOpen(false)}
+            onSubmit={(reason)=> requestAsset(id, token, {
+                reason,
+                userName: user.name,
+                userId: user.id
+            })}
+        // onSubmit={handleRequestSubmit}
+        />
     </>;
 }
 

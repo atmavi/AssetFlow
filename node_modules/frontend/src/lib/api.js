@@ -46,6 +46,19 @@ export const fetchAsset = async (token, id) => {
   return response.json();
 };
 
+export const requestAsset = async (id, token, data) => {
+  const response = await fetch(`${API_BASE_URL}/api/assets/${id}`, {
+    method: "POST",
+    headers: token ? { Authorization: `Bearer ${token}` } : {},
+    body: JSON.stringify(data)
+  });
+
+  if (!response.ok) throw new Error("Failed to request asset");
+  return response.json();
+}
+
+
+
 
 
 
