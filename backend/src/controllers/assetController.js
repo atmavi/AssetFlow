@@ -32,59 +32,73 @@ export const getAssetSummary = async (_req, res) => {
  * @route   GET /api/assets
  */
 export const getAllAssets = async (req, res) => {
-    try {
-      const assets = await Asset.find().sort({ createdAt: -1 });
-      return res.json(assets);
-    } catch (error) {
-      console.error("Error fetching assets:", error);
-      return res.status(500).json({ message: "Failed to fetch assets." });
-    }
-  };
-  
-  /**
-   * @desc    Get single asset by ID
-   * @route   GET /api/assets/:id
-   */
-  export const getAssetById = async (req, res) => {
-    try {
-      const { id } = req.params;
-      const asset = await Asset.findById(id);
-  
-      if (!asset) {
-        return res.status(404).json({ message: "Asset not found." });
-      }
-  
-      return res.json(asset);
-    } catch (error) {
-      // This catches invalid Mongoose ObjectIDs
-      if (error.kind === "ObjectId") {
-        return res.status(400).json({ message: "Invalid Asset ID format." });
-      }
-      console.error("Error fetching asset:", error);
-      return res.status(500).json({ message: "Internal server error." });
-    }
-  };
+  try {
+    // 1. Extract the status from the query string (e.g., /api/assets?status=IN_USE)
+    const { status } = req.query;
 
-  export const requestAsset = async (req, res) => {
-    try {
-      const { id } = req.params;
-      const { reason, userName, userId } = req.body;
-  
-      const asset = await Asset.findById(id);
-      if (!asset) return res.status(404).json({ message: "Asset not found" });
-  
-      // Business Logic: Prevent requesting if already assigned
-      if (asset.status !== "Available") {
-        return res.status(400).json({ message: "Asset is not available for request" });
-      }
-  
-      asset.requests.push({ userId, userName, reason });
-      await asset.save();
-  
-      res.status(200).json({ message: "Request submitted successfully", asset });
-    } catch (error) {
-      res.status(500).json({ message: "Server error", error });
+    // 2. Build a dynamic filter object
+    // If status exists and isn't 'all', add it to the query
+    const filter = {};
+    if (status && status !== 'all') {
+      filter.status = status;
     }
-  };
 
-  
+    // 3. Apply the filter and sort by newest first
+    const assets = await Asset.find(filter).sort({ createdAt: -1 });
+
+    return res.json(assets);
+  } catch (error) {
+    console.error("Error fetching assets:", error);
+    return res.status(500).json({ 
+      success: false, 
+      message: "Failed to fetch assets." 
+    });
+  }
+};
+
+/**
+ * @desc    Get single asset by ID
+ * @route   GET /api/assets/:id
+ */
+export const getAssetById = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const asset = await Asset.findById(id);
+
+    if (!asset) {
+      return res.status(404).json({ message: "Asset not found." });
+    }
+
+    return res.json(asset);
+  } catch (error) {
+    // This catches invalid Mongoose ObjectIDs
+    if (error.kind === "ObjectId") {
+      return res.status(400).json({ message: "Invalid Asset ID format." });
+    }
+    console.error("Error fetching asset:", error);
+    return res.status(500).json({ message: "Internal server error." });
+  }
+};
+
+export const requestAsset = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { reason, userName, userId } = req.body;
+
+    const asset = await Asset.findById(id);
+    if (!asset) return res.status(404).json({ message: "Asset not found" });
+
+    // Business Logic: Prevent requesting if already assigned
+    if (asset.status !== "Available") {
+      return res.status(400).json({ message: "Asset is not available for request" });
+    }
+
+    asset.requests.push({ userId, userName, reason });
+    await asset.save();
+
+    res.status(200).json({ message: "Request submitted successfully", asset });
+  } catch (error) {
+    res.status(500).json({ message: "Server error", error });
+  }
+};
+
