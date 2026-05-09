@@ -1,6 +1,6 @@
 import React from "react";
 
-function Header(user, logout) {
+function Header({user, logout}) {
   return (
     <header className="border-b border-gray-200 bg-white">
         <div className="mx-auto flex max-w-5xl items-center justify-between px-4 py-4">
