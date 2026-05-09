@@ -1,5 +1,3 @@
-import react from "react";
-
 const getStatusStyle = (status) => {
     switch (status) {
         case "available": return "bg-green-100 text-green-800";
