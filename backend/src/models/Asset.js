@@ -16,8 +16,8 @@ const assetSchema = new mongoose.Schema(
     category: { type: String, required: true, trim: true },
     status: {
       type: String,
-      enum: ["Available", "Assigned", "Maintenance"],
-      default: "Available"
+      enum: ["available", "assigned", "maintenance"],
+      default: "available"
     },
     specifications: { type: String, default: "" },
     assignmentHistory: { type: [assignmentSchema], default: [] },
@@ -27,7 +27,7 @@ const assetSchema = new mongoose.Schema(
         userName: String,
         reason: String,
         requestedAt: { type: Date, default: Date.now },
-        status: { type: String, enum: ["Pending", "Approved", "Denied"], default: "Pending" }
+        status: { type: String, enum: ["pending", "approved", "denied"], default: "pending" }
       }
     ]
   },
