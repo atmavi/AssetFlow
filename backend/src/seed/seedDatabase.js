@@ -6,7 +6,7 @@ const dummyAssets = [
     name: "MacBook Pro 14",
     serialNumber: "MBP14-2026-001",
     category: "Laptop",
-    status: "Assigned",
+    status: "assigned",
     specifications: "Apple M3 Pro, 18GB RAM, 512GB SSD",
     assignmentHistory: [
       {
@@ -20,14 +20,14 @@ const dummyAssets = [
     name: "Dell 27 4K Monitor",
     serialNumber: "MON-4K-027-011",
     category: "Monitor",
-    status: "Available",
+    status: "available",
     specifications: "3840x2160, USB-C Hub"
   },
   {
     name: "Logitech MX Keys",
     serialNumber: "KB-MXK-1003",
     category: "Peripheral",
-    status: "Maintenance",
+    status: "maintenance",
     specifications: "Wireless keyboard, backlit keys"
   }
 ];
