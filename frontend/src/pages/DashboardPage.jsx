@@ -35,7 +35,8 @@ function DashboardPage() {
     if (token) loadData();
   }, [token]);
 
-  return (
+  return <>
+    <Header />
     <div className="min-h-screen bg-gray-100">
       <main className="mx-auto max-w-5xl px-4 py-8">
         {error && <p className="mb-4 rounded-md bg-red-50 p-3 text-sm text-red-700">{error}</p>}
@@ -58,7 +59,7 @@ function DashboardPage() {
         )}
       </main>
     </div>
-  );
+  </>
 }
 
 export default DashboardPage;
