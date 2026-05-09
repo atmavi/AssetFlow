@@ -102,3 +102,41 @@ export const requestAsset = async (req, res) => {
   }
 };
 
+export const createAsset = async (req, res) => {
+  try {
+    const { name, serialNumber, category, status, specifications, assigneeName } = req.body;
+
+    // Check if serial number already exists (Data Integrity check)
+    const existingAsset = await Asset.findOne({ serialNumber });
+    if (existingAsset) {
+      return res.status(400).json({ message: "Serial number already exists." });
+    }
+
+    // Build the new asset object
+    const newAssetData = {
+      name,
+      serialNumber,
+      category,
+      status,
+      specifications,
+      assignmentHistory: []
+    };
+
+    // If status is 'assigned', we must initialize the history
+    if (status === 'assigned' && assigneeName) {
+      newAssetData.assignmentHistory.push({
+        assigneeName,
+        assignedAt: new Date(),
+        returnedAt: null
+      });
+    }
+
+    const asset = new Asset(newAssetData);
+    await asset.save();
+    
+    return res.status(201).json(asset);
+  } catch (error) {
+    console.error("Error creating asset:", error);
+    return res.status(500).json({ message: "Failed to create asset." });
+  }
+};
