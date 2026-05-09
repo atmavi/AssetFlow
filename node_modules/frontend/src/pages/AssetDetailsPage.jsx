@@ -62,7 +62,7 @@ function AssetDetailsPage() {
                                 Edit
                             </button>
                             <button className="h-[34px] rounded-lg border border-[#ececec] bg-[#5a90e0] px-3.5 text-[13px] font-medium text-white hover:bg-[#4a80d0]">
-                                Check In
+                                Request Asset
                             </button>
                         </div>
                     </div>
