@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { fetchAsset } from "../lib/api";
+import StatusPill from "../components/StatusPill";
 
 function AssetDetailsPage() {
     const { id } = useParams();
@@ -75,11 +76,7 @@ function AssetDetailsPage() {
                             <div className="overflow-hidden rounded-lg border border-[#ececec] bg-white shadow-sm">
                                 <div className="flex items-center justify-between border-b border-[#ececec] px-5 py-4">
                                     <h2 className="text-[13px] font-semibold uppercase tracking-wider text-[#8a8a8a]">Core Information</h2>
-                                    <span className={`flex items-center gap-1.5 rounded-full px-2.5 py-0.5 text-[12px] font-medium 
-                            ${asset.status === 'Available' ? 'bg-green-100 text-green-800' : 'bg-blue-100 text-blue-800'}`}>
-                                        <span className="h-1.5 w-1.5 rounded-full bg-current" />
-                                        {asset.status}
-                                    </span>
+                                    <StatusPill status={asset.status} />
                                 </div>
                                 <div className="p-5">
                                     {/* Asset Illustration Mockup */}

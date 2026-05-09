@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import { fetchAssets } from "../lib/api";
 import { Link } from "react-router-dom";
+import StatusPill from "./StatusPill";
 
 function AssetsTable() {
     const { token } = useAuth();
@@ -74,9 +75,10 @@ function AssetsTable() {
                                         <td className="whitespace-nowrap px-6 py-4 text-sm text-gray-500">{asset.serialNumber}</td>
                                         <td className="whitespace-nowrap px-6 py-4 text-sm text-gray-500">{asset.category}</td>
                                         <td className="whitespace-nowrap px-6 py-4 text-sm">
-                                            <span className={`inline-flex rounded-full px-2 text-xs font-semibold leading-5 ${getStatusStyle(asset.status)}`}>
+                                            <StatusPill status={asset.status} />
+                                            {/* <span className={`inline-flex rounded-full px-2 text-xs font-semibold leading-5 ${getStatusStyle(asset.status)}`}>
                                                 {asset.status}
-                                            </span>
+                                            </span> */}
                                         </td>
                                     </tr>
                                 ))}
