@@ -28,8 +28,8 @@ export const fetchDashboardSummary = async (token) => {
   return data;
 };
 
-export const fetchAssets = async (token) => {
-  const response = await fetch(`${API_BASE_URL}/api/assets`, {
+export const fetchAssets = async (token, status="all") => {
+  const response = await fetch(`${API_BASE_URL}/api/assets?status=${status}`, {
     headers: token ? { Authorization: `Bearer ${token}` } : {}
   });
 
