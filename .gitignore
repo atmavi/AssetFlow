@@ -1,14 +1,76 @@
-# Logs
-logs
+# -------------------------------------------------------------------
+# System Files
+# -------------------------------------------------------------------
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# -------------------------------------------------------------------
+# Dependencies & Tooling Cache
+# -------------------------------------------------------------------
+**/node_modules/
+**/.vite/
+**/.cache/
+**/.eslintcache
+**/.stylelintcache
+**/.prettiercache
+.npm
+.yarn/
+.pnpm-store/
+
+# -------------------------------------------------------------------
+# Environment Variables (CRITICAL: Never commit these!)
+# -------------------------------------------------------------------
+**/.env
+**/.env.local
+**/.env.development.local
+**/.env.test.local
+**/.env.production.local
+**/auth_key.json
+**/firebase-key.json
+
+# -------------------------------------------------------------------
+# Build Outputs
+# -------------------------------------------------------------------
+**/dist/
+**/build/
+**/out/
+**/.next/
+**/target/
+
+# -------------------------------------------------------------------
+# Logs & Debugging
+# -------------------------------------------------------------------
+**/logs/
 *.log
 npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
 
-# Dependency directories
-node_modules/
-.vite/
+# -------------------------------------------------------------------
+# IDE / Editor Specific
+# -------------------------------------------------------------------
+.vscode/*
+!.vscode/extensions.json
+!.vscode/launch.json
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.swp
 
-# Optional: Bundler cache
-.cache/
+# -------------------------------------------------------------------
+# Testing
+# -------------------------------------------------------------------
+**/coverage/
+**/.nyc_output/
 
-# Production build output
-dist/
+# -------------------------------------------------------------------
+# Database (If running local DBs)
+# -------------------------------------------------------------------
+**/data/
+**/*.db
+**/*.sqlite
