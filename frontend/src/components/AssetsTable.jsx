@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import { useAuth } from "../context/AuthContext";
+import { useSearchParams } from 'react-router-dom';
 import { fetchAssets } from "../lib/api";
 import { Link } from "react-router-dom";
 import StatusPill from "./StatusPill";
+import Header from "./Header";
 
 function AssetsTable() {
     const { token } = useAuth();
@@ -16,7 +18,7 @@ function AssetsTable() {
             try {
                 setError("");
 
-                const assetsData = await fetchAssets(token);
+                const assetsData = await fetchAssets(token, status);
 
                 setAssets(assetsData);
             } catch (requestError) {
@@ -40,7 +42,6 @@ function AssetsTable() {
     };
 
     return <>
-
         {error && <p className="mb-4 rounded-md bg-red-50 p-3 text-sm text-red-700">{error}</p>}
 
         {loading ? (
@@ -49,7 +50,14 @@ function AssetsTable() {
             <>
                 <div className="overflow-hidden rounded-lg bg-white shadow">
                     <div className="px-4 py-5 sm:px-6 border-b border-gray-200">
-                        <h3 className="text-lg font-medium leading-6 text-gray-900">Recent Assets</h3>
+                        <h3 className="text-lg font-medium leading-6 text-gray-900">
+                            <div className="flex justify-between items-center w-full">
+                                <span>Recent Assets</span>
+                                <Link to="/assets" className="text-blue-600 hover:text-blue-800 text-sm">
+                                View All
+                                </Link>
+                            </div>
+                        </h3>
                     </div>
                     <div className="overflow-x-auto">
                         <table className="min-w-full divide-y divide-gray-200">

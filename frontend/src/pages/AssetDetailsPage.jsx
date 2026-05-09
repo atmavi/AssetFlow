@@ -6,6 +6,7 @@ import StatusPill from "../components/StatusPill";
 import RequestModal from "../components/RequestModal";
 
 import { requestAsset } from "../lib/api";
+import Header from "../components/Header";
 
 function AssetDetailsPage() {
     const navigate = useNavigate();
@@ -17,26 +18,6 @@ function AssetDetailsPage() {
     const [error, setError] = useState("");
 
     const [isModalOpen, setIsModalOpen] = useState(false);
-
-    // const handleRequestSubmit = async (id, data) => {
-    //     const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/assets/${id}/request`, {
-    //         method: "POST",
-    //         headers: {
-    //             "Content-Type": "application/json",
-    //             Authorization: `Bearer ${token}`
-    //         },
-    //         body: JSON.stringify({
-    //             reason,
-    //             userName: user.name,
-    //             userId: user.id
-    //         })
-    //     });
-
-    //     if (response.ok) {
-    //         // Refresh asset data or show success toast
-    //         setAsset(await response.json().asset);
-    //     }
-    // };
 
     useEffect(() => {
         const loadData = async () => {
@@ -59,6 +40,8 @@ function AssetDetailsPage() {
     const currentAssignment = asset.assignmentHistory?.find(h => !h.returnedAt) || asset.assignmentHistory?.[0];
 
     return <>
+        <Header />
+
         {error && <p className="mb-4 rounded-md bg-red-50 p-3 text-sm text-red-700">{error}</p>}
 
         {loading ? (
@@ -90,7 +73,7 @@ function AssetDetailsPage() {
                                 Edit
                             </button>
 
-                            {asset.status === "Available" ? (
+                            {asset.status === "available" ? (
                                 /* Primary Action: Request Asset (Blue) */
                                 <button
                                     onClick={() => setIsModalOpen(true)}

@@ -37,8 +37,6 @@ function DashboardPage() {
 
   return (
     <div className="min-h-screen bg-gray-100">
-      <Header user={user} logout={logout} />
-
       <main className="mx-auto max-w-5xl px-4 py-8">
         {error && <p className="mb-4 rounded-md bg-red-50 p-3 text-sm text-red-700">{error}</p>}
 
@@ -48,10 +46,10 @@ function DashboardPage() {
           <>
             {/* Metric Cards Section */}
             <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4 mb-8">
-              <MetricCard title="Total Assets" value={summary.totalAssets} />
-              <MetricCard title="Assigned" value={summary.assignedAssets} />
-              <MetricCard title="Available" value={summary.availableAssets} />
-              <MetricCard title="Maintenance" value={summary.maintenanceAssets} />
+              <MetricCard title="Total Assets" value={summary.totalAssets} status="all" />
+              <MetricCard title="Assigned" value={summary.assignedAssets} status="assigned" />
+              <MetricCard title="Available" value={summary.availableAssets} status="available" />
+              <MetricCard title="Maintenance" value={summary.maintenanceAssets} status="maintenance" />
             </div>
 
             {/* Assets Table Section */}
