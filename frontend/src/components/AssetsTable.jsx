@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import { fetchAssets } from "../lib/api";
+import { Link } from "react-router-dom";
 
 function AssetsTable() {
     const { token } = useAuth();
@@ -62,7 +63,14 @@ function AssetsTable() {
                             <tbody className="divide-y divide-gray-200 bg-white">
                                 {assets.map((asset) => (
                                     <tr key={asset._id} className="hover:bg-gray-50 transition-colors">
-                                        <td className="whitespace-nowrap px-6 py-4 text-sm font-medium text-gray-900">{asset.name}</td>
+                                        <td className="whitespace-nowrap px-6 py-4 text-sm font-medium">
+                                            <Link
+                                                to={`/assets/${asset._id}`}
+                                                className="text-blue-600 hover:text-blue-900 hover:underline"
+                                            >
+                                                {asset.name}
+                                            </Link>
+                                        </td>
                                         <td className="whitespace-nowrap px-6 py-4 text-sm text-gray-500">{asset.serialNumber}</td>
                                         <td className="whitespace-nowrap px-6 py-4 text-sm text-gray-500">{asset.category}</td>
                                         <td className="whitespace-nowrap px-6 py-4 text-sm">
