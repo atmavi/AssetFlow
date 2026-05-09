@@ -10,9 +10,9 @@ export const getAssetSummary = async (_req, res) => {
     // We run these in parallel for better performance
     const [total, assigned, available, maintenance] = await Promise.all([
       Asset.countDocuments(),
-      Asset.countDocuments({ status: "Assigned" }),
-      Asset.countDocuments({ status: "Available" }),
-      Asset.countDocuments({ status: "Maintenance" }),
+      Asset.countDocuments({ status: "assigned" }),
+      Asset.countDocuments({ status: "available" }),
+      Asset.countDocuments({ status: "maintenance" }),
     ]);
 
     return res.json({
@@ -34,7 +34,7 @@ export const getAssetSummary = async (_req, res) => {
 export const getAllAssets = async (req, res) => {
   try {
     // 1. Extract the status from the query string (e.g., /api/assets?status=IN_USE)
-    const { status } = req.query;
+    const { status = 'all' } = req.query;
 
     // 2. Build a dynamic filter object
     // If status exists and isn't 'all', add it to the query
