@@ -20,7 +20,16 @@ const assetSchema = new mongoose.Schema(
       default: "Available"
     },
     specifications: { type: String, default: "" },
-    assignmentHistory: { type: [assignmentSchema], default: [] }
+    assignmentHistory: { type: [assignmentSchema], default: [] },
+    requests: [
+      {
+        userId: String,
+        userName: String,
+        reason: String,
+        requestedAt: { type: Date, default: Date.now },
+        status: { type: String, enum: ["Pending", "Approved", "Denied"], default: "Pending" }
+      }
+    ]
   },
   { timestamps: true }
 );

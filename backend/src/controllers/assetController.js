@@ -65,4 +65,26 @@ export const getAllAssets = async (req, res) => {
     }
   };
 
+  export const requestAsset = async (req, res) => {
+    try {
+      const { id } = req.params;
+      const { reason, userName, userId } = req.body;
+  
+      const asset = await Asset.findById(id);
+      if (!asset) return res.status(404).json({ message: "Asset not found" });
+  
+      // Business Logic: Prevent requesting if already assigned
+      if (asset.status !== "Available") {
+        return res.status(400).json({ message: "Asset is not available for request" });
+      }
+  
+      asset.requests.push({ userId, userName, reason });
+      await asset.save();
+  
+      res.status(200).json({ message: "Request submitted successfully", asset });
+    } catch (error) {
+      res.status(500).json({ message: "Server error", error });
+    }
+  };
+
   
