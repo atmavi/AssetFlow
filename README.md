@@ -11,7 +11,9 @@ To run this application immediately, ensure you have **Docker** and **Docker Com
    git clone git@github.com:atmavi/AssetFlow.git
    cd AssetFlow
 2. **Start the application:**
-   ```docker-compose up --build
+   ```bash
+   docker-compose up --build
+
 2. **Access the Application:**
     - Frontend: http://localhost:5173
     - Backend API: http://localhost:5000
