@@ -2,9 +2,9 @@ import react from "react";
 
 const getStatusStyle = (status) => {
     switch (status) {
-        case "Available": return "bg-green-100 text-green-800";
-        case "Assigned": return "bg-blue-100 text-blue-800";
-        case "Maintenance": return "bg-yellow-100 text-yellow-800";
+        case "available": return "bg-green-100 text-green-800";
+        case "assigned": return "bg-blue-100 text-blue-800";
+        case "maintenance": return "bg-yellow-100 text-yellow-800";
         default: return "bg-gray-100 text-gray-800";
     }
 };
