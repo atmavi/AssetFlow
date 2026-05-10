@@ -4,9 +4,12 @@ import { fetchAssets } from "../lib/api";
 import { Link } from "react-router-dom";
 import StatusPill from "./StatusPill";
 import AddAssetModal from "./AddAssetModal";
+import useRefresh from "../hooks/useRefresh"
 
 function AssetsTable() {
     const { token } = useAuth();
+    const [refreshKey, triggerRefresh] = useRefresh()
+
     const [assets, setAssets] = useState([]);
     const [isModalOpen, setIsModalOpen] = useState(false);
     
@@ -30,7 +33,12 @@ function AssetsTable() {
         };
 
         if (token) loadData();
-    }, [token]);
+    }, [token, refreshKey]);
+
+    const onModalClose = ()=> {
+        triggerRefresh();
+        setIsModalOpen(false);
+    }
 
     return <>
 
@@ -106,7 +114,7 @@ function AssetsTable() {
 
             <AddAssetModal
                 isOpen={isModalOpen}
-                onClose={()=> setIsModalOpen(false)}
+                onClose={onModalClose}
             />
     </>
 }
