@@ -31,16 +31,6 @@ function AssetsTable() {
         if (token) loadData();
     }, [token]);
 
-    // Helper to color-code status badges
-    const getStatusStyle = (status) => {
-        switch (status) {
-            case "Available": return "bg-green-100 text-green-800";
-            case "Assigned": return "bg-blue-100 text-blue-800";
-            case "Maintenance": return "bg-yellow-100 text-yellow-800";
-            default: return "bg-gray-100 text-gray-800";
-        }
-    };
-
     return <>
         {error && <p className="mb-4 rounded-md bg-red-50 p-3 text-sm text-red-700">{error}</p>}
 
@@ -84,9 +74,6 @@ function AssetsTable() {
                                         <td className="whitespace-nowrap px-6 py-4 text-sm text-gray-500">{asset.category}</td>
                                         <td className="whitespace-nowrap px-6 py-4 text-sm">
                                             <StatusPill status={asset.status} />
-                                            {/* <span className={`inline-flex rounded-full px-2 text-xs font-semibold leading-5 ${getStatusStyle(asset.status)}`}>
-                                                {asset.status}
-                                            </span> */}
                                         </td>
                                     </tr>
                                 ))}
