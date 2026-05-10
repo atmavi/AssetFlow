@@ -3,17 +3,19 @@ import React, { useState } from 'react';
 import { addAsset } from '../lib/api';
 import { useAuth } from "../context/AuthContext";
 
+const FORM_EMPTY_STATE = {
+    name: '',
+    serialNumber: '',
+    category: '',
+    status: 'available',
+    specifications: '',
+}
+
 const AddAssetModal = ({ isOpen, onClose, onAssetAdded }) => {
     const { token } = useAuth();
     const [isSubmitting, setIsSubmitting] = useState(false);
 
-    const [formData, setFormData] = useState({
-        name: '',
-        serialNumber: '',
-        category: '',
-        status: 'available',
-        specifications: '',
-    });
+    const [formData, setFormData] = useState(FORM_EMPTY_STATE);
 
     if (!isOpen) return null;
 
@@ -28,6 +30,7 @@ const AddAssetModal = ({ isOpen, onClose, onAssetAdded }) => {
         } finally {
             onClose();
             setIsSubmitting(false);
+            setFormData({...FORM_EMPTY_STATE})
         }
     };
 
