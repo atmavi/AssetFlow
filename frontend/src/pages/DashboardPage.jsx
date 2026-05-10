@@ -13,7 +13,7 @@ const defaultSummary = {
 };
 
 function DashboardPage() {
-  const { token, user, logout } = useAuth();
+  const { token } = useAuth();
   const [summary, setSummary] = useState(defaultSummary);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
@@ -54,6 +54,7 @@ function DashboardPage() {
             </div>
 
             {/* Assets Table Section */}
+
             <AssetsTable />
           </>
         )}

@@ -43,9 +43,23 @@ function AssetsTable() {
                         <h3 className="text-lg font-medium leading-6 text-gray-900">
                             <div className="flex justify-between items-center w-full">
                                 <span>Recent Assets</span>
-                                <Link to="/assets" className="text-blue-600 hover:text-blue-800 text-sm">
-                                View All
-                                </Link>
+
+                                {/* Grouping the link and button together */}
+                                <div className="flex items-center gap-4">
+                                    <Link to="/assets" className="text-blue-600 hover:text-blue-800 text-sm font-medium">
+                                        View All
+                                    </Link>
+
+                                    <button
+                                        onClick={() => setIsModalOpen(true)}
+                                        className="bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium px-3 py-1.5 rounded-md transition-colors shadow-sm flex items-center gap-2"
+                                    >
+                                        <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                                            <path fillRule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clipRule="evenodd" />
+                                        </svg>
+                                        Add Asset
+                                    </button>
+                                </div>
                             </div>
                         </h3>
                     </div>
