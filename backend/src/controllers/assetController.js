@@ -89,7 +89,7 @@ export const requestAsset = async (req, res) => {
     if (!asset) return res.status(404).json({ message: "Asset not found" });
 
     // Business Logic: Prevent requesting if already assigned
-    if (asset.status !== "Available") {
+    if (asset.status !== "available") {
       return res.status(400).json({ message: "Asset is not available for request" });
     }
 

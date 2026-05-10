@@ -9,6 +9,6 @@ assetRouter.get("/summary", getAssetSummary);
 assetRouter.get("/", getAllAssets);
 assetRouter.post("/", createAsset);
 assetRouter.get("/:id", getAssetById);
-assetRouter.post("/:id", requestAsset);
+assetRouter.post("/:id/request-asset", requestAsset);
 
 export default assetRouter;
