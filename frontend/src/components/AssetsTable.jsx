@@ -1,14 +1,15 @@
 import { useEffect, useState } from "react";
 import { useAuth } from "../context/AuthContext";
-import { useSearchParams } from 'react-router-dom';
 import { fetchAssets } from "../lib/api";
 import { Link } from "react-router-dom";
 import StatusPill from "./StatusPill";
-import Header from "./Header";
+import AddAssetModal from "./AddAssetModal";
 
 function AssetsTable() {
     const { token } = useAuth();
     const [assets, setAssets] = useState([]);
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    
 
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
@@ -32,6 +33,7 @@ function AssetsTable() {
     }, [token]);
 
     return <>
+
         {error && <p className="mb-4 rounded-md bg-red-50 p-3 text-sm text-red-700">{error}</p>}
 
         {loading ? (
@@ -101,6 +103,11 @@ function AssetsTable() {
                     </div>
                 </div>
             </>}
+
+            <AddAssetModal
+                isOpen={isModalOpen}
+                onClose={()=> setIsModalOpen(false)}
+            />
     </>
 }
 
