@@ -47,9 +47,12 @@ export const fetchAsset = async (token, id) => {
 };
 
 export const requestAsset = async (id, token, data) => {
-  const response = await fetch(`${API_BASE_URL}/api/assets/${id}`, {
+  const response = await fetch(`${API_BASE_URL}/api/assets/${id}/request-asset`, {
     method: "POST",
-    headers: token ? { Authorization: `Bearer ${token}` } : {},
+    headers: token ? { 
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+    } : {},
     body: JSON.stringify(data)
   });
 
