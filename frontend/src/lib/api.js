@@ -60,7 +60,10 @@ export const requestAsset = async (id, token, data) => {
 export const addAsset = async (token, data) => {
   const response = await fetch(`${API_BASE_URL}/api/assets`, {
     method: "POST",
-    headers: token ? { Authorization: `Bearer ${token}` } : {},
+    headers: token ? { 
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+    } : {},
     body: JSON.stringify(data)
   });
 
