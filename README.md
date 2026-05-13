@@ -14,9 +14,12 @@ To run this application immediately, ensure you have **Docker** and **Docker Com
    ```bash
    docker-compose up --build
 
-2. **Access the Application:**
+3. **Access the Application:**
     - Frontend: http://localhost:5173
     - Backend API: http://localhost:5000
+
+4. **Running test**
+   - To be added
 
 ## Important Notes
 Authentication: A mock login page is provided. You can use any credentials to enter, or use the seeded admin account details found in the backend seeding script.
