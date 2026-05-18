@@ -17,14 +17,6 @@ app.use(express.json());
 app.use("/api/auth", authRouter);
 app.use("/api/assets", assetRouter);
 
-app.get("/health", async (_req, res) => {
-  const dbState = mongoose.connection.readyState;
-  res.json({
-    status: "ok",
-    dbConnected: dbState === 1
-  });
-});
-
 app.get("/", (_req, res) => {
   res.json({ message: "AssetFlow backend is running." });
 });
