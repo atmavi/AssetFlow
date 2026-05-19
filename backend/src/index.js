@@ -4,14 +4,12 @@ import dotenv from "dotenv";
 import express from "express";
 import mongoose from "mongoose";
 
-const logger = require('./utils/logger');
+import logger from "./utils/logger";
 import authRouter from "./routes/authRoutes.js";
 import assetRouter from "./routes/assetRoutes.js";
 import { ensureSeedData } from "./seed/seedDatabase.js";
 
 dotenv.config();
-
-const logger = require('./utils/logger')
 
 const app = express();
 const port = process.env.PORT || 5000;
