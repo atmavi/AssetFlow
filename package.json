@@ -10,5 +10,9 @@
     "dev:frontend": "npm --workspace frontend run dev",
     "dev:backend": "npm --workspace backend run dev",
     "build": "npm --workspace frontend run build"
+  },
+  "dependencies": {
+    "morgan": "^1.10.1",
+    "winston": "^3.19.0"
   }
 }
