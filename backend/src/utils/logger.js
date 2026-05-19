@@ -1,4 +1,5 @@
-const winston = require('winston');
+import winston from "winston";
+import dotenv from "dotenv";
 
 dotenv.config();
 
@@ -35,4 +36,4 @@ const logger = winston.createLogger({
   transports,
 });
 
-module.exports = logger;
+export default logger;

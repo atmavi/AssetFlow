@@ -4,7 +4,7 @@ import dotenv from "dotenv";
 import express from "express";
 import mongoose from "mongoose";
 
-import logger from "./utils/logger";
+import logger from "./utils/logger.js";
 import authRouter from "./routes/authRoutes.js";
 import assetRouter from "./routes/assetRoutes.js";
 import { ensureSeedData } from "./seed/seedDatabase.js";
@@ -21,7 +21,7 @@ app.use(express.json());
 app.use(
   morgan(':method :url :status :res[content-length] - :response-time ms', {
     stream: { write: (message) => logger.http(message.trim()) },
-  })
+  })  
 );
 
 app.use("/api/auth", authRouter);
