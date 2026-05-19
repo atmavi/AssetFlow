@@ -11,7 +11,6 @@ import { ensureSeedData } from "./seed/seedDatabase.js";
 
 dotenv.config();
 
-const morgan = require('morgan');
 const logger = require('./utils/logger')
 
 const app = express();
